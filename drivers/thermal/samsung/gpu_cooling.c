@@ -525,9 +525,10 @@ MODULE_PARM_DESC(game_mode, "Thermal Game Mode: relax thermal throttling for gam
 static int gpufreq_apply_cooling(struct gpufreq_cooling_device *gpufreq_cdev,
 				 unsigned long cooling_state)
 {
+	unsigned int gpu_cooling_freq = 0;
+
 	if (exynos_thermal_game_mode && cooling_state > 1)
 		cooling_state = 1;
-	unsigned int gpu_cooling_freq = 0;
 
 	/* Check if the old cooling action is same as new cooling action */
 	if (gpufreq_cdev->gpufreq_state == cooling_state)
