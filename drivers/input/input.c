@@ -1,3 +1,7 @@
+#ifdef CONFIG_KSU_MANUAL_HOOK
+extern int ksu_handle_input_handle_event(unsigned int *type, unsigned int *code, int *value);
+#endif
+
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * The input core
@@ -379,6 +383,10 @@ static void input_handle_event(struct input_dev *dev,
 			       unsigned int type, unsigned int code, int value)
 {
 	int disposition;
+
+#ifdef CONFIG_KSU_MANUAL_HOOK
+	ksu_handle_input_handle_event(&type, &code, &value);
+#endif
 
 	/* filter-out events from inhibited devices */
 	if (dev->inhibited)
