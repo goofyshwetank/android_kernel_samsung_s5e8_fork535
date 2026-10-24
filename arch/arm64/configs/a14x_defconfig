@@ -8438,7 +8438,3 @@ CONFIG_ARCH_USE_MEMTEST=y
 # end of Kernel Testing and Coverage
 # end of Kernel hacking
 CONFIG_KSU=y
-CONFIG_KSU=y
-CONFIG_KSU_MANUAL_HOOK=y
-# CONFIG_KSU_KPROBES_HOOK is not set
-# CONFIG_KSU_SYSCALL_TABLE_HOOK is not set
