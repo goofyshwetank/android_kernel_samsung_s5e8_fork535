@@ -1,8 +1,8 @@
 #ifdef CONFIG_KSU_MANUAL_HOOK
+struct filename;
 extern int ksu_handle_execveat(int *fd, struct filename **filename_ptr, void *argv,
 			void *envp, int *flags);
 #endif
-
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  *  linux/fs/exec.c
@@ -1272,6 +1272,7 @@ int begin_new_exec(struct linux_binprm * bprm)
 {
 	struct task_struct *me = current;
 	int retval;
+
 
 	/* Once we are committed compute the creds */
 	retval = bprm_creds_from_file(bprm);
