@@ -2638,6 +2638,12 @@ static irqreturn_t nvt_ts_work_func(int irq, void *data)
    if (POINT_DATA_LEN >= POINT_DATA_CHECKSUM_LEN) {
        ret = nvt_ts_point_data_checksum(point_data, POINT_DATA_CHECKSUM_LEN);
        if (ret) {
+           /* Resume can expose one stale SPI frame before the controller settles. */
+           input_info(true, &ts->client->dev,
+                      "point data checksum failed; reloading firmware\n");
+           nvt_update_firmware(ts->platdata->firmware_name);
+           nvt_check_fw_reset_state(RESET_STATE_REK);
+           nvt_ts_mode_restore(ts);
            goto XFER_ERROR;
        }
    }
